@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTS Edge — Beat The Streak Daily Picks</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #00e87a;
+    --green-dim: #00b85f;
+    --red: #ff3b5c;
+    --yellow: #ffe033;
+    --bg: #0a0d0f;
+    --surface: #111518;
+    --surface2: #181d21;
+    --border: rgba(255,255,255,0.07);
+    --text: #e8edf2;
+    --muted: #5a6470;
+    --accent: #00e87a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid noise texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,232,122,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,232,122,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Ambient glow */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(0,232,122,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HEADER */
+  header {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 40px;
+  }
+
+  .header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 8vw, 88px);
+    line-height: 0.9;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .logo span {
+    color: var(--green);
+    display: block;
+  }
+
+  .date-badge {
+    text-align: right;
+  }
+
+  .date-badge .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .date-badge .date {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--green);
+  }
+
+  /* GAME BANNER */
+  .game-banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--green);
+    border-radius: 4px;
+    padding: 20px 28px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .game-matchup {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .game-matchup .at {
+    color: var(--muted);
+    margin: 0 10px;
+    font-size: 20px;
+  }
+
+  .game-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-chip {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .meta-chip .chip-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .meta-chip .chip-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* WEATHER BAR */
+  .weather-bar {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 28px;
+    margin-bottom: 40px;
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: center;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  .weather-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex: 0 0 auto;
+  }
+
+  .weather-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .weather-item .icon {
+    font-size: 16px;
+  }
+
+  .park-tag {
+    margin-left: auto;
+    background: rgba(255,58,92,0.12);
+    border: 1px solid rgba(255,58,92,0.25);
+    color: var(--red);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PICK CARDS */
+  .picks-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .pick-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: border-color 0.2s, transform 0.2s;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .pick-card:nth-child(1) { animation-delay: 0.15s; }
+  .pick-card:nth-child(2) { animation-delay: 0.25s; }
+  .pick-card:nth-child(3) { animation-delay: 0.35s; }
+
+  .pick-card:hover {
+    border-color: rgba(0,232,122,0.3);
+    transform: translateY(-2px);
+  }
+
+  .pick-card.gold {
+    border-left: 3px solid var(--green);
+  }
+
+  .pick-card.gold::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 200px; height: 200px;
+    background: radial-gradient(ellipse at top right, rgba(0,232,122,0.06), transparent 70%);
+    pointer-events: none;
+  }
+
+  .pick-card.silver { border-left: 3px solid #8899aa; }
+  .pick-card.bronze { border-left: 3px solid #cc8844; }
+
+  .pick-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 16px;
+  }
+
+  .pick-rank {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--muted);
+  }
+
+  .pick-card.gold .pick-rank { color: var(--green); }
+  .pick-card.silver .pick-rank { color: #8899aa; }
+  .pick-card.bronze .pick-rank { color: #cc8844; }
+
+  .confidence-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  .confidence-pill.high {
+    background: rgba(0,232,122,0.12);
+    border: 1px solid rgba(0,232,122,0.3);
+    color: var(--green);
+  }
+
+  .confidence-pill.med-high {
+    background: rgba(255,224,51,0.1);
+    border: 1px solid rgba(255,224,51,0.25);
+    color: var(--yellow);
+  }
+
+  .confidence-pill.medium {
+    background: rgba(255,224,51,0.08);
+    border: 1px solid rgba(255,224,51,0.2);
+    color: #ccb030;
+  }
+
+  .pick-player {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 52px);
+    line-height: 1;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+
+  .pick-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .pick-info span {
+    color: var(--text);
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .stat-box {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 8px 12px;
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+  }
+
+  .stat-box .sv {
+    font-family: 'DM Mono', monospace;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    display: block;
+  }
+
+  .stat-box .sk {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .stat-box .sv.good { color: var(--green); }
+  .stat-box .sv.warn { color: var(--yellow); }
+
+  /* Reasons list */
+  .reasons {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .reasons li {
+    font-size: 13px;
+    color: #9aa5b1;
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .reasons li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 11px;
+    top: 1px;
+  }
+
+  .reasons li strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  .reasons li.risk::before {
+    content: '⚠';
+    color: var(--red);
+  }
+
+  .reasons li.risk {
+    color: rgba(255,59,92,0.7);
+  }
+
+  /* FINAL VERDICT */
+  .verdict-box {
+    background: var(--surface);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 32px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.6s 0.45s ease both;
+  }
+
+  .verdict-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(0,232,122,0.06), transparent 60%);
+    pointer-events: none;
+  }
+
+  .verdict-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 16px;
+  }
+
+  .verdict-player {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(44px, 7vw, 72px);
+    line-height: 1;
+    letter-spacing: 3px;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .verdict-player span {
+    color: var(--green);
+  }
+
+  .verdict-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .verdict-reason {
+    font-size: 14px;
+    color: #9aa5b1;
+    line-height: 1.7;
+    max-width: 680px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+  }
+
+  .verdict-reason strong {
+    color: var(--green);
+  }
+
+  /* SUMMARY TABLE */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 64px;
+    animation: fadeUp 0.6s 0.55s ease both;
+  }
+
+  .summary-table thead th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .summary-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .summary-table tbody tr:hover {
+    background: rgba(255,255,255,0.02);
+  }
+
+  .summary-table tbody td {
+    padding: 16px;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .summary-table tbody td.rank-cell {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    width: 50px;
+  }
+
+  .summary-table tbody tr:nth-child(1) td.rank-cell { color: var(--green); }
+  .summary-table tbody tr:nth-child(2) td.rank-cell { color: #8899aa; }
+  .summary-table tbody tr:nth-child(3) td.rank-cell { color: #cc8844; }
+
+  .summary-table .player-name {
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .summary-table .player-meta {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    line-height: 2;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .date-badge { text-align: left; }
+    .game-banner { flex-direction: column; align-items: flex-start; }
+    .stat-box { min-width: 70px; }
+    .park-tag { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        BTS<span>EDGE</span>
+      </div>
+      <div class="date-badge">
+        <div class="label">Daily Analysis</div>
+        <div class="date">WED · MAR 25 · 2026</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- GAME BANNER -->
+  <div class="game-banner">
+    <div class="game-matchup">
+      New York Yankees <span class="at">@</span> San Francisco Giants
+    </div>
+    <div class="game-meta">
+      <div class="meta-chip">
+        <span class="chip-label">First Pitch</span>
+        <span class="chip-val">8:05 PM ET</span>
+      </div>
+      <div class="meta-chip">
+        <span class="chip-label">Venue</span>
+        <span class="chip-val">Oracle Park</span>
+      </div>
+      <div class="meta-chip">
+        <span class="chip-label">Broadcast</span>
+        <span class="chip-val">Netflix</span>
+      </div>
+      <div class="meta-chip">
+        <span class="chip-label">Matchup</span>
+        <span class="chip-val">Fried (L) vs. Webb (R)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEATHER BAR -->
+  <div class="weather-bar">
+    <div class="weather-title">⚡ Conditions</div>
+    <div class="weather-item"><span class="icon">🌡</span> 63.9°F</div>
+    <div class="weather-item"><span class="icon">💨</span> 15 mph wind</div>
+    <div class="weather-item"><span class="icon">💧</span> 67% humidity</div>
+    <div class="weather-item"><span class="icon">🌤</span> 0% rain</div>
+    <div class="park-tag">⬇ Pitcher-Friendly Park</div>
+  </div>
+
+  <!-- PICKS -->
+  <div class="section-title">Today's Ranked Picks</div>
+
+  <div class="picks-grid">
+
+    <!-- PICK 1 -->
+    <div class="pick-card gold">
+      <div class="pick-header">
+        <div class="pick-rank">🥇 Pick #1 — Top Play</div>
+        <div class="confidence-pill high">HIGH Confidence</div>
+      </div>
+      <div class="pick-player">Luis Arraez</div>
+      <div class="pick-info">
+        2B · San Francisco Giants &nbsp;·&nbsp; Batting <span>5th</span> &nbsp;·&nbsp; vs. Max Fried (LHP)
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="sv good">96th</span>
+          <span class="sk">xBA Pctl</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">3.1%</span>
+          <span class="sk">K-Rate</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">5.3%</span>
+          <span class="sk">Whiff %</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">.274</span>
+          <span class="sk">vs LHP</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv">21</span>
+          <span class="sk">2025 Ks</span>
+        </div>
+      </div>
+      <ul class="reasons">
+        <li><strong>Best contact profile in baseball</strong> — 96th percentile xBA, lowest whiff rate (5.3%) in all of MLB in 2025</li>
+        <li>Only <strong>21 strikeouts all season</strong> in 2025 — physically difficult to retire on K alone</li>
+        <li>Batting 5th = <strong>guaranteed multiple plate appearances</strong>, even against an ace</li>
+        <li>Career .274 vs LHP in 917 PA — consistent even against his tougher split</li>
+        <li class="risk">Risk: Fried posted .222 BAA in 2025 — elite SP is never a "gimme"</li>
+      </ul>
+    </div>
+
+    <!-- PICK 2 -->
+    <div class="pick-card silver">
+      <div class="pick-header">
+        <div class="pick-rank">🥈 Pick #2 — Strong Play</div>
+        <div class="confidence-pill med-high">MED-HIGH Confidence</div>
+      </div>
+      <div class="pick-player">Aaron Judge</div>
+      <div class="pick-info">
+        RF · New York Yankees &nbsp;·&nbsp; Batting <span>2nd</span> &nbsp;·&nbsp; vs. Logan Webb (RHP)
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="sv good">95.4</span>
+          <span class="sk">Avg EV</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">58.2%</span>
+          <span class="sk">Hard Hit</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">.460</span>
+          <span class="sk">xwOBA</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">.429</span>
+          <span class="sk">vs Webb</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv warn">2nd</span>
+          <span class="sk">Bat Order</span>
+        </div>
+      </div>
+      <ul class="reasons">
+        <li><strong>Most plate appearances</strong> in lineup batting 2nd — highest chance of multiple ABs</li>
+        <li>3-for-7 career vs. Webb including 2 HR — <strong>.429 average in limited sample</strong></li>
+        <li>95.4 mph avg exit velocity, 58.2% hard-hit — <strong>elite quality of contact</strong></li>
+        <li>.460 xwOBA in 2025 — best power/contact combo in the game</li>
+        <li class="risk">Risk: Webb owns sub-3.00 ERA at Oracle Park, ground ball approach neutralizes power hitters</li>
+        <li class="risk">Risk: Oracle Park's evening wind suppresses fly balls, works against Judge's profile</li>
+      </ul>
+    </div>
+
+    <!-- PICK 3 -->
+    <div class="pick-card bronze">
+      <div class="pick-header">
+        <div class="pick-rank">🥉 Pick #3 — Speculative</div>
+        <div class="confidence-pill medium">MEDIUM Confidence</div>
+      </div>
+      <div class="pick-player">Matt Chapman</div>
+      <div class="pick-info">
+        3B · San Francisco Giants &nbsp;·&nbsp; Batting <span>3rd</span> &nbsp;·&nbsp; vs. Max Fried (LHP)
+      </div>
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="sv good">RHB</span>
+          <span class="sk">Handedness</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv good">3rd</span>
+          <span class="sk">Bat Order</span>
+        </div>
+        <div class="stat-box">
+          <span class="sv warn">vs LHP</span>
+          <span class="sk">Platoon ✓</span>
+        </div>
+      </div>
+      <ul class="reasons">
+        <li><strong>Right-handed vs. left-handed pitcher</strong> — natural platoon advantage against Fried</li>
+        <li>Batting 3rd in the order — premium lineup slot with guaranteed RBI opportunities</li>
+        <li>Hot in Giants spring training leading into Opening Day</li>
+        <li class="risk">Risk: History of hot springs followed by cold April starts</li>
+        <li class="risk">Risk: Limited 2026 advanced stats available; small sample from spring</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- FINAL VERDICT -->
+  <div class="section-title">Final Verdict</div>
+
+  <div class="verdict-box">
+    <div class="verdict-label">🏆 Tonight's BTS Pick</div>
+    <div class="verdict-player">LUIS <span>ARRAEZ</span></div>
+    <div class="verdict-sub">2B · San Francisco Giants · vs. Max Fried (LHP, NYY)</div>
+    <div class="verdict-reason">
+      In a game featuring two ace-caliber starters at one of the most pitcher-friendly parks in baseball, you need the one hitter who is <strong>nearly physically incapable of striking out</strong>. Arraez posted a 3.1% K-rate and 5.3% whiff rate — both the best in MLB — in 2025. His 96th percentile xBA isn't about power; it's about finding gaps and barrels on contact. Even Fried, with his .222 BAA, will struggle to retire the most elite contact hitter in the game cleanly across multiple at-bats. The math favors Arraez more than anyone else in this lineup.
+    </div>
+  </div>
+
+  <!-- SUMMARY TABLE -->
+  <div class="section-title">Quick Reference</div>
+
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Player</th>
+        <th>Matchup</th>
+        <th>Key Stat</th>
+        <th>Confidence</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank-cell">1</td>
+        <td>
+          <div class="player-name">Luis Arraez</div>
+          <div class="player-meta">SF Giants · 2B · Bat 5th</div>
+        </td>
+        <td>vs. Fried (L)</td>
+        <td>3.1% K-Rate · 96th xBA</td>
+        <td><span class="confidence-pill high">HIGH</span></td>
+      </tr>
+      <tr>
+        <td class="rank-cell">2</td>
+        <td>
+          <div class="player-name">Aaron Judge</div>
+          <div class="player-meta">NYY · RF · Bat 2nd</div>
+        </td>
+        <td>vs. Webb (R)</td>
+        <td>.460 xwOBA · .429 vs Webb</td>
+        <td><span class="confidence-pill med-high">MED-HIGH</span></td>
+      </tr>
+      <tr>
+        <td class="rank-cell">3</td>
+        <td>
+          <div class="player-name">Matt Chapman</div>
+          <div class="player-meta">SF Giants · 3B · Bat 3rd</div>
+        </td>
+        <td>vs. Fried (L)</td>
+        <td>RHB platoon edge · Hot spring</td>
+        <td><span class="confidence-pill medium">MEDIUM</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    <p>BTS Edge · Data sourced from ESPN · Baseball Savant · FanGraphs · MLB.com · Swish Analytics</p>
+    <p>For entertainment purposes · Updated daily before first pitch · March 25, 2026</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
