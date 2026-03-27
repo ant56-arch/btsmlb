@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --green:#00e87a; --green-dim:#00b85f; --red:#ff3b5c; --yellow:#ffe033;
-    --bg:#0a0d0f; --surface:#111518; --surface2:#181d21;
-    --border:rgba(255,255,255,0.07); --text:#e8edf2; --muted:#5a6470;
+    --green:#00e87a;--green-dim:#00b85f;--red:#ff3b5c;--yellow:#ffe033;
+    --bg:#0a0d0f;--surface:#111518;--surface2:#181d21;
+    --border:rgba(255,255,255,0.07);--text:#e8edf2;--muted:#5a6470;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
@@ -45,184 +45,179 @@
   .confidence-pill.high{background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.3);color:var(--green);}
   .confidence-pill.medhigh{background:rgba(255,224,51,0.08);border:1px solid rgba(255,224,51,0.25);color:var(--yellow);}
   .confidence-pill.medium{background:rgba(255,224,51,0.06);border:1px solid rgba(255,224,51,0.18);color:#ccb030;}
-
-/* PICKS */
-.picks-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
-.pick-card{background:var(–surface);border:1px solid var(–border);border-radius:6px;padding:26px;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
-.pick-card:hover{border-color:rgba(0,232,122,0.25);transform:translateY(-2px);}
-.pick-card.gold{border-left:3px solid var(–green);}
-.pick-card.gold::before{content:’’;position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(ellipse at top right,rgba(0,232,122,0.05),transparent 70%);pointer-events:none;}
-.pick-card.silver{border-left:3px solid #8899aa;}
-.pick-card.bronze{border-left:3px solid #cc8844;}
-.pick-card:nth-child(1){animation:fadeUp 0.4s 0.05s ease both;}
-.pick-card:nth-child(2){animation:fadeUp 0.4s 0.15s ease both;}
-.pick-card:nth-child(3){animation:fadeUp 0.4s 0.25s ease both;}
-.pick-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:10px;}
-.pick-rank{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;color:var(–muted);}
-.pick-card.gold .pick-rank{color:var(–green);}
-.pick-card.silver .pick-rank{color:#8899aa;}
-.pick-card.bronze .pick-rank{color:#cc8844;}
-.pick-player{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(32px,4.5vw,48px);line-height:1;letter-spacing:2px;margin-bottom:4px;}
-.pick-info{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);margin-bottom:14px;letter-spacing:1px;}
-.pick-info span{color:var(–text);}
-.stats-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
-.stat-box{background:var(–surface2);border:1px solid var(–border);border-radius:3px;padding:7px 11px;flex:1;min-width:72px;text-align:center;}
-.stat-box .sv{font-family:‘DM Mono’,monospace;font-size:14px;font-weight:500;color:var(–text);display:block;}
-.stat-box .sk{font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:2px;}
-.stat-box .sv.good{color:var(–green);}
-.stat-box .sv.warn{color:var(–yellow);}
-.reasons{list-style:none;display:flex;flex-direction:column;gap:6px;}
-.reasons li{font-size:13px;color:#9aa5b1;line-height:1.5;padding-left:16px;position:relative;}
-.reasons li::before{content:‘→’;position:absolute;left:0;color:var(–muted);font-size:11px;top:1px;}
-.reasons li strong{color:var(–text);font-weight:600;}
-.reasons li.risk::before{content:‘⚠’;color:var(–red);}
-.reasons li.risk{color:rgba(255,80,100,0.75);}
-.verdict-box{background:var(–surface);border:1px solid var(–green);border-radius:6px;padding:30px;margin-bottom:36px;position:relative;overflow:hidden;}
-.verdict-box::before{content:’’;position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(0,232,122,0.05),transparent 60%);pointer-events:none;}
-.verdict-label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(–green);margin-bottom:12px;}
-.verdict-player{font-family:‘Bebas Neue’,sans-serif;font-size:clamp(42px,6vw,68px);line-height:1;letter-spacing:3px;margin-bottom:6px;}
-.verdict-player span{color:var(–green);}
-.verdict-sub{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);margin-bottom:18px;letter-spacing:1px;}
-.verdict-reason{font-size:13px;color:#9aa5b1;line-height:1.7;max-width:700px;border-top:1px solid var(–border);padding-top:18px;}
-.verdict-reason strong{color:var(–green);}
-.summary-table{width:100%;border-collapse:collapse;margin-bottom:48px;}
-.summary-table thead th{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(–muted);text-align:left;padding:0 14px 12px;border-bottom:1px solid var(–border);}
-.summary-table tbody tr{border-bottom:1px solid var(–border);transition:background 0.15s;}
-.summary-table tbody tr:hover{background:rgba(255,255,255,0.02);}
-.summary-table tbody td{padding:13px 14px;font-size:13px;}
-.summary-table .rank-cell{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;width:44px;}
-.summary-table tbody tr:nth-child(1) .rank-cell{color:var(–green);}
-.summary-table tbody tr:nth-child(2) .rank-cell{color:#8899aa;}
-.summary-table tbody tr:nth-child(3) .rank-cell{color:#cc8844;}
-.player-name{font-weight:600;font-size:14px;}
-.player-meta{font-size:11px;color:var(–muted);font-family:‘DM Mono’,monospace;}
-
-/* GAMES TAB */
-.games-intro{font-size:13px;color:var(–muted);margin-bottom:24px;line-height:1.6;}
-.game-card{background:var(–surface);border:1px solid var(–border);border-radius:6px;margin-bottom:16px;overflow:hidden;transition:border-color 0.2s;}
-.game-card:hover{border-color:rgba(255,255,255,0.11);}
-.game-card-header{padding:16px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;border-bottom:1px solid var(–border);background:var(–surface2);}
-.game-teams{font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;flex:1;}
-.game-teams .at{color:var(–muted);font-size:17px;margin:0 7px;}
-.game-time-block{text-align:right;}
-.game-time{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–text);}
-.game-network{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);}
-.game-card-body{padding:20px 22px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
-.game-section{padding:0 18px;border-right:1px solid var(–border);}
-.game-section:first-child{padding-left:0;}
-.game-section:last-child{border-right:none;padding-right:0;}
-.game-section-title{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(–muted);margin-bottom:12px;}
-.pitcher-row{display:flex;flex-direction:column;gap:8px;}
-.pitcher-item{background:var(–surface2);border:1px solid var(–border);border-radius:3px;padding:9px 11px;}
-.pitcher-team-label{font-family:‘DM Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;}
-.pitcher-name{font-family:‘Bebas Neue’,sans-serif;font-size:17px;letter-spacing:1px;margin-bottom:3px;}
-.pitcher-hand{display:inline-block;font-family:‘DM Mono’,monospace;font-size:9px;padding:2px 6px;border-radius:2px;margin-left:5px;background:rgba(255,255,255,0.06);color:var(–text);}
-.pitcher-stats{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);}
-.weather-grid{display:flex;flex-direction:column;gap:0;}
-.w-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
-.w-row:last-child{border-bottom:none;}
-.w-label{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:1px;}
-.w-val{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–text);}
-.w-val.good{color:var(–green);}
-.w-val.warn{color:var(–yellow);}
-.w-val.bad{color:var(–red);}
-.park-block{display:flex;flex-direction:column;gap:8px;}
-.park-name-big{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:2px;}
-.park-tag{display:inline-block;font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:2px;margin-bottom:6px;}
-.park-tag.pitcher{background:rgba(255,59,92,0.1);border:1px solid rgba(255,59,92,0.25);color:var(–red);}
-.park-tag.hitter{background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.25);color:var(–green);}
-.park-tag.neutral{background:rgba(255,224,51,0.08);border:1px solid rgba(255,224,51,0.2);color:var(–yellow);}
-.park-stat-row{display:flex;gap:5px;flex-wrap:wrap;}
-.park-stat{background:var(–surface2);border:1px solid var(–border);border-radius:3px;padding:6px 10px;flex:1;min-width:58px;text-align:center;}
-.park-stat .pv{font-family:‘DM Mono’,monospace;font-size:13px;display:block;}
-.park-stat .pk{font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:2px;}
-.park-note{font-size:11px;color:var(–muted);line-height:1.5;margin-top:4px;}
-.bts-env-bar{background:var(–surface2);border:1px solid var(–border);border-radius:4px;padding:14px 20px;margin-bottom:12px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.bts-env-label{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;}
-.bts-env-rating{font-family:‘Bebas Neue’,sans-serif;font-size:20px;letter-spacing:2px;}
-.bts-env-note{font-size:12px;color:var(–muted);flex:1;}
-.mini-games-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:48px;}
-.mini-game{background:var(–surface);border:1px solid var(–border);border-radius:4px;padding:13px 15px;}
-.mini-game-teams{font-family:‘Bebas Neue’,sans-serif;font-size:15px;letter-spacing:1px;margin-bottom:3px;}
-.mini-game-meta{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);}
-
-/* HISTORY */
-.history-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;}
-.add-pick-btn{background:var(–green);color:#000;border:none;border-radius:3px;font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;cursor:pointer;font-weight:500;transition:background 0.2s;}
-.add-pick-btn:hover{background:var(–green-dim);}
-.season-strip{display:flex;gap:4px;margin-bottom:22px;flex-wrap:wrap;}
-.strip-stat{background:var(–surface2);border:1px solid var(–border);border-radius:3px;padding:11px 13px;flex:1;min-width:88px;text-align:center;}
-.strip-stat .sv{font-family:‘DM Mono’,monospace;font-size:18px;font-weight:500;display:block;}
-.strip-stat .sk{font-size:9px;color:var(–muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:3px;}
-.history-list{display:flex;flex-direction:column;gap:8px;margin-bottom:48px;}
-.history-empty{text-align:center;padding:52px 20px;font-family:‘DM Mono’,monospace;font-size:12px;color:var(–muted);letter-spacing:2px;border:1px dashed var(–border);border-radius:6px;}
-.history-row{background:var(–surface);border:1px solid var(–border);border-radius:4px;padding:15px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;transition:border-color 0.2s;}
-.history-row:hover{border-color:rgba(255,255,255,0.11);}
-.history-row.hit{border-left:3px solid var(–green);}
-.history-row.out{border-left:3px solid var(–red);}
-.history-row.pending{border-left:3px solid var(–muted);}
-.hr-date{font-family:‘DM Mono’,monospace;font-size:11px;color:var(–muted);min-width:74px;}
-.hr-player{font-family:‘Bebas Neue’,sans-serif;font-size:19px;letter-spacing:2px;flex:1;min-width:120px;}
-.hr-matchup{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);flex:1;min-width:100px;}
-.hr-result{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:2px;min-width:74px;text-align:center;}
-.hr-result.hit{background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.3);color:var(–green);}
-.hr-result.out{background:rgba(255,59,92,0.08);border:1px solid rgba(255,59,92,0.22);color:var(–red);}
-.hr-result.pending{background:rgba(90,100,112,0.12);border:1px solid var(–border);color:var(–muted);}
-.hr-actions{display:flex;gap:5px;margin-left:auto;}
-.hr-btn{background:none;border:1px solid var(–border);border-radius:2px;color:var(–muted);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;cursor:pointer;transition:all 0.15s;}
-.hr-btn.mark-hit:hover{border-color:var(–green);color:var(–green);}
-.hr-btn.mark-out:hover{border-color:var(–red);color:var(–red);}
-.hr-btn.del:hover{border-color:var(–red);color:var(–red);}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
-.modal-overlay.open{display:flex;}
-.modal{background:var(–surface);border:1px solid var(–border);border-top:2px solid var(–green);border-radius:6px;padding:28px;width:100%;max-width:450px;margin:24px;animation:fadeUp 0.3s ease both;}
-.modal h3{font-family:‘Bebas Neue’,sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:20px;color:var(–green);}
-.form-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
-.form-row label{font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(–muted);}
-.form-row input,.form-row select{background:var(–surface2);border:1px solid var(–border);border-radius:3px;color:var(–text);font-family:‘DM Sans’,sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color 0.2s;}
-.form-row input:focus,.form-row select:focus{border-color:rgba(0,232,122,0.4);}
-.form-row select option{background:var(–surface2);}
-.modal-btns{display:flex;gap:10px;margin-top:6px;}
-.btn-save{flex:1;background:var(–green);color:#000;border:none;border-radius:3px;font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:11px;cursor:pointer;font-weight:500;}
-.btn-save:hover{background:var(–green-dim);}
-.btn-cancel{background:transparent;color:var(–muted);border:1px solid var(–border);border-radius:3px;font-family:‘DM Mono’,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:11px 18px;cursor:pointer;}
-.btn-cancel:hover{color:var(–text);}
-
-/* PROMPT TAB */
-.prompt-page{display:flex;flex-direction:column;gap:20px;margin-bottom:48px;}
-.prompt-card{background:var(–surface);border:1px solid var(–border);border-left:3px solid var(–green);border-radius:6px;padding:24px;}
-.prompt-card h3{font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;color:var(–green);margin-bottom:6px;}
-.prompt-card p{font-size:13px;color:var(–muted);margin-bottom:16px;line-height:1.6;}
-.prompt-box{background:var(–surface2);border:1px solid var(–border);border-radius:4px;padding:16px 80px 16px 16px;font-family:‘DM Mono’,monospace;font-size:11px;color:var(–text);line-height:1.9;position:relative;white-space:pre-wrap;word-break:break-word;}
-.copy-btn{position:absolute;top:12px;right:12px;background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.25);color:var(–green);font-family:‘DM Mono’,monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:2px;cursor:pointer;transition:background 0.2s;}
-.copy-btn:hover{background:rgba(0,232,122,0.2);}
-.copy-btn.copied{color:var(–yellow);border-color:var(–yellow);background:rgba(255,224,51,0.1);}
-.workflow-card{background:var(–surface);border:1px solid var(–border);border-radius:6px;padding:24px;}
-.workflow-card h3{font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:16px;}
-.step-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
-.step-list li{display:flex;gap:14px;align-items:flex-start;font-size:13px;color:#9aa5b1;line-height:1.6;}
-.step-num{font-family:‘Bebas Neue’,sans-serif;font-size:22px;color:var(–green);min-width:26px;line-height:1;}
-.step-list strong{color:var(–text);}
-
-footer{border-top:1px solid var(–border);padding:26px 0;text-align:center;margin-top:8px;}
-footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:1px;line-height:2.2;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:680px){
-.header-inner{flex-direction:column;align-items:flex-start;gap:14px;}
-.date-badge{text-align:left;}
-.game-card-body{grid-template-columns:1fr;}
-.game-section{padding:14px 0;border-right:none;border-bottom:1px solid var(–border);}
-.game-section:last-child{border-bottom:none;}
-.mini-games-grid{grid-template-columns:1fr;}
-.tabs{flex-wrap:wrap;}
-.tab-btn{font-size:9px;padding:11px 10px;flex:1;}
-.history-row{flex-direction:column;align-items:flex-start;}
-.hr-actions{margin-left:0;}
-}
+  /* PICKS */
+  .picks-grid{display:flex;flex-direction:column;gap:14px;margin-bottom:36px;}
+  .pick-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:26px;position:relative;overflow:hidden;transition:border-color 0.2s,transform 0.2s;}
+  .pick-card:hover{border-color:rgba(0,232,122,0.25);transform:translateY(-2px);}
+  .pick-card.gold{border-left:3px solid var(--green);}
+  .pick-card.gold::before{content:'';position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(ellipse at top right,rgba(0,232,122,0.05),transparent 70%);pointer-events:none;}
+  .pick-card.silver{border-left:3px solid #8899aa;}
+  .pick-card.bronze{border-left:3px solid #cc8844;}
+  .pick-card:nth-child(1){animation:fadeUp 0.4s 0.05s ease both;}
+  .pick-card:nth-child(2){animation:fadeUp 0.4s 0.15s ease both;}
+  .pick-card:nth-child(3){animation:fadeUp 0.4s 0.25s ease both;}
+  .pick-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:10px;}
+  .pick-rank{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);}
+  .pick-card.gold .pick-rank{color:var(--green);}
+  .pick-card.silver .pick-rank{color:#8899aa;}
+  .pick-card.bronze .pick-rank{color:#cc8844;}
+  .pick-player{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4.5vw,48px);line-height:1;letter-spacing:2px;margin-bottom:4px;}
+  .pick-info{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:14px;letter-spacing:1px;}
+  .pick-info span{color:var(--text);}
+  .stats-row{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:14px;}
+  .stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:7px 11px;flex:1;min-width:72px;text-align:center;}
+  .stat-box .sv{font-family:'DM Mono',monospace;font-size:14px;font-weight:500;color:var(--text);display:block;}
+  .stat-box .sk{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:2px;}
+  .stat-box .sv.good{color:var(--green);}
+  .stat-box .sv.warn{color:var(--yellow);}
+  .reasons{list-style:none;display:flex;flex-direction:column;gap:6px;}
+  .reasons li{font-size:13px;color:#9aa5b1;line-height:1.5;padding-left:16px;position:relative;}
+  .reasons li::before{content:'→';position:absolute;left:0;color:var(--muted);font-size:11px;top:1px;}
+  .reasons li strong{color:var(--text);font-weight:600;}
+  .reasons li.risk::before{content:'⚠';color:var(--red);}
+  .reasons li.risk{color:rgba(255,80,100,0.75);}
+  .verdict-box{background:var(--surface);border:1px solid var(--green);border-radius:6px;padding:30px;margin-bottom:36px;position:relative;overflow:hidden;}
+  .verdict-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center top,rgba(0,232,122,0.05),transparent 60%);pointer-events:none;}
+  .verdict-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+  .verdict-player{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,6vw,68px);line-height:1;letter-spacing:3px;margin-bottom:6px;}
+  .verdict-player span{color:var(--green);}
+  .verdict-sub{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px;letter-spacing:1px;}
+  .verdict-reason{font-size:13px;color:#9aa5b1;line-height:1.7;max-width:700px;border-top:1px solid var(--border);padding-top:18px;}
+  .verdict-reason strong{color:var(--green);}
+  .summary-table{width:100%;border-collapse:collapse;margin-bottom:48px;}
+  .summary-table thead th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 14px 12px;border-bottom:1px solid var(--border);}
+  .summary-table tbody tr{border-bottom:1px solid var(--border);transition:background 0.15s;}
+  .summary-table tbody tr:hover{background:rgba(255,255,255,0.02);}
+  .summary-table tbody td{padding:13px 14px;font-size:13px;}
+  .summary-table .rank-cell{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;width:44px;}
+  .summary-table tbody tr:nth-child(1) .rank-cell{color:var(--green);}
+  .summary-table tbody tr:nth-child(2) .rank-cell{color:#8899aa;}
+  .summary-table tbody tr:nth-child(3) .rank-cell{color:#cc8844;}
+  .player-name{font-weight:600;font-size:14px;}
+  .player-meta{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
+  /* GAMES */
+  .games-intro{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+  .game-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;margin-bottom:16px;overflow:hidden;transition:border-color 0.2s;}
+  .game-card:hover{border-color:rgba(255,255,255,0.11);}
+  .game-card-header{padding:16px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;border-bottom:1px solid var(--border);background:var(--surface2);}
+  .game-teams{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;flex:1;}
+  .game-teams .at{color:var(--muted);font-size:17px;margin:0 7px;}
+  .game-time-block{text-align:right;}
+  .game-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--text);}
+  .game-network{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+  .game-card-body{padding:20px 22px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+  .game-section{padding:0 18px;border-right:1px solid var(--border);}
+  .game-section:first-child{padding-left:0;}
+  .game-section:last-child{border-right:none;padding-right:0;}
+  .game-section-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+  .pitcher-row{display:flex;flex-direction:column;gap:8px;}
+  .pitcher-item{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:9px 11px;}
+  .pitcher-team-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px;}
+  .pitcher-name{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;margin-bottom:3px;}
+  .pitcher-hand{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:2px;margin-left:5px;background:rgba(255,255,255,0.06);color:var(--text);}
+  .pitcher-stats{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+  .weather-grid{display:flex;flex-direction:column;}
+  .w-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.04);}
+  .w-row:last-child{border-bottom:none;}
+  .w-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+  .w-val{font-family:'DM Mono',monospace;font-size:11px;color:var(--text);}
+  .w-val.good{color:var(--green);}
+  .w-val.warn{color:var(--yellow);}
+  .w-val.bad{color:var(--red);}
+  .park-block{display:flex;flex-direction:column;gap:8px;}
+  .park-name-big{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;margin-bottom:2px;}
+  .park-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:2px;margin-bottom:6px;}
+  .park-tag.pitcher{background:rgba(255,59,92,0.1);border:1px solid rgba(255,59,92,0.25);color:var(--red);}
+  .park-tag.hitter{background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.25);color:var(--green);}
+  .park-tag.neutral{background:rgba(255,224,51,0.08);border:1px solid rgba(255,224,51,0.2);color:var(--yellow);}
+  .park-stat-row{display:flex;gap:5px;flex-wrap:wrap;}
+  .park-stat{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:6px 10px;flex:1;min-width:58px;text-align:center;}
+  .park-stat .pv{font-family:'DM Mono',monospace;font-size:13px;display:block;}
+  .park-stat .pk{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:2px;}
+  .park-note{font-size:11px;color:var(--muted);line-height:1.5;margin-top:4px;}
+  .bts-env-bar{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:14px 20px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .bts-env-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;}
+  .bts-env-rating{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;}
+  .bts-env-note{font-size:12px;color:var(--muted);flex:1;}
+  .mini-games-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:48px;}
+  .mini-game{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:13px 15px;}
+  .mini-game-teams{font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;margin-bottom:3px;}
+  .mini-game-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+  /* HISTORY */
+  .history-controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:12px;}
+  .add-pick-btn{background:var(--green);color:#000;border:none;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;cursor:pointer;font-weight:500;transition:background 0.2s;}
+  .add-pick-btn:hover{background:var(--green-dim);}
+  .season-strip{display:flex;gap:4px;margin-bottom:22px;flex-wrap:wrap;}
+  .strip-stat{background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:11px 13px;flex:1;min-width:88px;text-align:center;}
+  .strip-stat .sv{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;display:block;}
+  .strip-stat .sk{font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:3px;}
+  .history-list{display:flex;flex-direction:column;gap:8px;margin-bottom:48px;}
+  .history-empty{text-align:center;padding:52px 20px;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:2px;border:1px dashed var(--border);border-radius:6px;}
+  .history-row{background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:15px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;transition:border-color 0.2s;}
+  .history-row:hover{border-color:rgba(255,255,255,0.11);}
+  .history-row.hit{border-left:3px solid var(--green);}
+  .history-row.out{border-left:3px solid var(--red);}
+  .history-row.pending{border-left:3px solid var(--muted);}
+  .hr-date{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);min-width:74px;}
+  .hr-player{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;flex:1;min-width:120px;}
+  .hr-matchup{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex:1;min-width:100px;}
+  .hr-result{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:4px 11px;border-radius:2px;min-width:74px;text-align:center;}
+  .hr-result.hit{background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.3);color:var(--green);}
+  .hr-result.out{background:rgba(255,59,92,0.08);border:1px solid rgba(255,59,92,0.22);color:var(--red);}
+  .hr-result.pending{background:rgba(90,100,112,0.12);border:1px solid var(--border);color:var(--muted);}
+  .hr-actions{display:flex;gap:5px;margin-left:auto;}
+  .hr-btn{background:none;border:1px solid var(--border);border-radius:2px;color:var(--muted);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;cursor:pointer;transition:all 0.15s;}
+  .hr-btn.mark-hit:hover{border-color:var(--green);color:var(--green);}
+  .hr-btn.mark-out:hover{border-color:var(--red);color:var(--red);}
+  .hr-btn.del:hover{border-color:var(--red);color:var(--red);}
+  .storage-notice{font-family:'DM Mono',monospace;font-size:10px;color:var(--green);letter-spacing:1px;margin-bottom:16px;padding:10px 14px;background:rgba(0,232,122,0.06);border:1px solid rgba(0,232,122,0.2);border-radius:3px;}
+  .storage-notice.loading{color:var(--muted);background:rgba(90,100,112,0.08);border-color:var(--border);}
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--surface);border:1px solid var(--border);border-top:2px solid var(--green);border-radius:6px;padding:28px;width:100%;max-width:450px;margin:24px;animation:fadeUp 0.3s ease both;}
+  .modal h3{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;margin-bottom:20px;color:var(--green);}
+  .form-row{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+  .form-row label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+  .form-row input,.form-row select{background:var(--surface2);border:1px solid var(--border);border-radius:3px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:9px 12px;outline:none;transition:border-color 0.2s;}
+  .form-row input:focus,.form-row select:focus{border-color:rgba(0,232,122,0.4);}
+  .form-row select option{background:var(--surface2);}
+  .modal-btns{display:flex;gap:10px;margin-top:6px;}
+  .btn-save{flex:1;background:var(--green);color:#000;border:none;border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:11px;cursor:pointer;font-weight:500;}
+  .btn-save:hover{background:var(--green-dim);}
+  .btn-cancel{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:3px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:11px 18px;cursor:pointer;}
+  .btn-cancel:hover{color:var(--text);}
+  /* PROMPT */
+  .prompt-page{display:flex;flex-direction:column;gap:20px;margin-bottom:48px;}
+  .prompt-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:6px;padding:24px;}
+  .prompt-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--green);margin-bottom:6px;}
+  .prompt-card p{font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6;}
+  .prompt-box{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:16px 80px 16px 16px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);line-height:1.9;position:relative;white-space:pre-wrap;word-break:break-word;}
+  .copy-btn{position:absolute;top:12px;right:12px;background:rgba(0,232,122,0.1);border:1px solid rgba(0,232,122,0.25);color:var(--green);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:2px;cursor:pointer;transition:background 0.2s;}
+  .copy-btn:hover{background:rgba(0,232,122,0.2);}
+  .copy-btn.copied{color:var(--yellow);border-color:var(--yellow);background:rgba(255,224,51,0.1);}
+  .workflow-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:24px;}
+  .workflow-card h3{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;margin-bottom:16px;}
+  .step-list{list-style:none;display:flex;flex-direction:column;gap:12px;}
+  .step-list li{display:flex;gap:14px;align-items:flex-start;font-size:13px;color:#9aa5b1;line-height:1.6;}
+  .step-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--green);min-width:26px;line-height:1;}
+  .step-list strong{color:var(--text);}
+  footer{border-top:1px solid var(--border);padding:26px 0;text-align:center;margin-top:8px;}
+  footer p{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;line-height:2.2;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:680px){
+    .header-inner{flex-direction:column;align-items:flex-start;gap:14px;}
+    .date-badge{text-align:left;}
+    .game-card-body{grid-template-columns:1fr;}
+    .game-section{padding:14px 0;border-right:none;border-bottom:1px solid var(--border);}
+    .game-section:last-child{border-bottom:none;}
+    .mini-games-grid{grid-template-columns:1fr;}
+    .tabs{flex-wrap:wrap;}
+    .tab-btn{font-size:9px;padding:11px 10px;flex:1;}
+    .history-row{flex-direction:column;align-items:flex-start;}
+    .hr-actions{margin-left:0;}
+  }
 </style>
-
 </head>
 <body>
 <div class="container">
@@ -232,14 +227,14 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
     <div class="logo">BTS<span>EDGE</span></div>
     <div class="date-badge">
       <div class="label">Daily Analysis</div>
-      <div class="date">THU · MAR 26 · 2026</div>
+      <div class="date">FRI · MAR 27 · 2026</div>
     </div>
   </div>
   <div class="score-bar">
-    <div class="score-item wins"><span class="sv" id="scoreWins">0</span><span class="sk">Hits ✅</span></div>
-    <div class="score-item losses"><span class="sv" id="scoreLosses">0</span><span class="sk">Outs ❌</span></div>
+    <div class="score-item wins"><span class="sv" id="scoreWins">—</span><span class="sk">Hits ✅</span></div>
+    <div class="score-item losses"><span class="sv" id="scoreLosses">—</span><span class="sk">Outs ❌</span></div>
     <div class="score-item"><span class="sv" id="scorePct">—</span><span class="sk">Hit Rate</span></div>
-    <div class="score-item streak"><span class="sv" id="scoreStreak">0</span><span class="sk">🔥 Streak</span></div>
+    <div class="score-item streak"><span class="sv" id="scoreStreak">—</span><span class="sk">🔥 Streak</span></div>
   </div>
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('picks',this)">Today's Picks</button>
@@ -252,84 +247,80 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
 <!-- ══ TAB 1: TODAY'S PICKS ══ -->
 
 <div id="tab-picks" class="tab-content active">
-  <div class="section-title">Opening Day — Thu Mar 26 · Top Picks</div>
+  <div class="section-title">Fri Mar 27 · Top Picks</div>
   <div class="picks-grid">
 
 ```
-<!-- PICK 1 -->
 <div class="pick-card gold">
   <div class="pick-header">
     <div class="pick-rank">🥇 Pick #1 — Top Play</div>
     <div class="confidence-pill high">HIGH Confidence</div>
   </div>
-  <div class="pick-player">Juan Soto</div>
-  <div class="pick-info">LF · New York Mets &nbsp;·&nbsp; Batting <span>3rd</span> &nbsp;·&nbsp; vs. Paul Skenes (RHP) · Citi Field</div>
+  <div class="pick-player">Ronald Acuña Jr.</div>
+  <div class="pick-info">RF · Atlanta Braves &nbsp;·&nbsp; Batting <span>1st</span> &nbsp;·&nbsp; vs. Cole Ragans (LHP) · Truist Park</div>
   <div class="stats-row">
-    <div class="stat-box"><span class="sv good">100th</span><span class="sk">xwOBA Pctl</span></div>
-    <div class="stat-box"><span class="sv good">.429</span><span class="sk">xwOBA</span></div>
-    <div class="stat-box"><span class="sv good">55.3%</span><span class="sk">Hard Hit</span></div>
-    <div class="stat-box"><span class="sv good">18.1%</span><span class="sk">Barrel %</span></div>
-    <div class="stat-box"><span class="sv warn">LHB</span><span class="sk">vs RHP ✓</span></div>
+    <div class="stat-box"><span class="sv good">92.7</span><span class="sk">Avg EV</span></div>
+    <div class="stat-box"><span class="sv good">52.5%</span><span class="sk">Hard Hit</span></div>
+    <div class="stat-box"><span class="sv good">.403</span><span class="sk">wOBA '25</span></div>
+    <div class="stat-box"><span class="sv good">15.7%</span><span class="sk">Barrel %</span></div>
+    <div class="stat-box"><span class="sv warn">RHB</span><span class="sk">vs LHP ✓</span></div>
   </div>
   <ul class="reasons">
-    <li><strong>100th percentile xwOBA and xBA</strong> — the most dangerous left-handed hitter in baseball against RHP</li>
-    <li>Posted <strong>.263/.921 OPS / 43 HR / 127 BB</strong> in 2025 — all-around monster season</li>
-    <li><strong>LHH platoon advantage</strong> vs Skenes (RHP) — Soto feasts on righties historically</li>
-    <li>Citi Field wind blowing OUT at <strong>14 mph to right-center</strong> — slight hitter boost today</li>
-    <li>Batting 3rd = <strong>premium lineup slot</strong> with multiple PA guarantees</li>
-    <li class="risk">Risk: Skenes owns a career 1.96 ERA and 5.22 K/BB — the best pitcher in baseball right now</li>
-    <li class="risk">Risk: Skenes' changeup held hitters to .095 BA in 2025 — Soto will see it early and often</li>
+    <li><strong>Back to full MVP form</strong> — finished 2025 with .290/.417/.518, 92.7 avg EV, 52.5% hard-hit rate</li>
+    <li><strong>Right-handed vs. left-handed pitcher</strong> — natural platoon advantage vs Ragans (LHP)</li>
+    <li>Leads off = <strong>most plate appearances in the lineup</strong>, guaranteed to bat at least 3–4 times</li>
+    <li>Ragans' 2025 ERA (4.67) was <strong>massively inflated by bad luck</strong> — his true xERA was 2.67. Hitters made contact, contact just went wrong. That changes tonight</li>
+    <li><strong>87°F at Truist Park</strong> — hottest conditions on today's slate. Heat = extra carry on fly balls at elevation (1,050 ft above sea level)</li>
+    <li>Truist Park runs above average in elevated conditions — <strong>Braves home opener, electric atmosphere</strong></li>
+    <li class="risk">Risk: Ragans' changeup had a 50.4% whiff rate in 2025 — his best pitch is elite when on</li>
+    <li class="risk">Risk: Ragans coming off injuries; if he's fully healthy his upside is much higher than his ERA suggests</li>
   </ul>
 </div>
 
-<!-- PICK 2 -->
 <div class="pick-card silver">
   <div class="pick-header">
     <div class="pick-rank">🥈 Pick #2 — Strong Play</div>
     <div class="confidence-pill medhigh">MED-HIGH Confidence</div>
   </div>
-  <div class="pick-player">Shohei Ohtani</div>
-  <div class="pick-info">DH · Los Angeles Dodgers &nbsp;·&nbsp; Batting <span>2nd</span> &nbsp;·&nbsp; vs. Zac Gallen (RHP) · Uniqlo Field</div>
+  <div class="pick-player">Vladimir Guerrero Jr.</div>
+  <div class="pick-info">1B · Toronto Blue Jays &nbsp;·&nbsp; Batting <span>3rd</span> &nbsp;·&nbsp; vs. Luis Severino (RHP) · Rogers Centre</div>
   <div class="stats-row">
-    <div class="stat-box"><span class="sv good">99th</span><span class="sk">xwOBA Pctl</span></div>
-    <div class="stat-box"><span class="sv good">.425</span><span class="sk">xwOBA</span></div>
-    <div class="stat-box"><span class="sv good">58.7%</span><span class="sk">Hard Hit</span></div>
-    <div class="stat-box"><span class="sv good">23.5%</span><span class="sk">Barrel %</span></div>
-    <div class="stat-box"><span class="sv good">94.9</span><span class="sk">Avg EV</span></div>
+    <div class="stat-box"><span class="sv good">93rd</span><span class="sk">xwOBA Pctl</span></div>
+    <div class="stat-box"><span class="sv good">.382</span><span class="sk">wOBA '25</span></div>
+    <div class="stat-box"><span class="sv good">54.1%</span><span class="sk">Hard Hit</span></div>
+    <div class="stat-box"><span class="sv good">RHB</span><span class="sk">Handedness</span></div>
+    <div class="stat-box"><span class="sv warn">Dome</span><span class="sk">No Weather</span></div>
   </div>
   <ul class="reasons">
-    <li><strong>99th percentile xwOBA</strong> — 3rd consecutive MVP, led MLB in runs (146) and total bases (380) in 2025</li>
-    <li>55 HR / .282 BA / 1.014 OPS in 2025 — <strong>best hitter on the planet</strong></li>
-    <li><strong>74°F with 8 mph wind blowing out</strong> at Uniqlo Field — perfect hitting conditions</li>
-    <li>Bats 2nd = <strong>most plate appearances in the lineup</strong></li>
-    <li>Gallen is good but has been hittable — <strong>3.50+ ERA in recent seasons</strong></li>
-    <li class="risk">Risk: Late 8:30 PM ET start (5:30 PT) — Gallen benefits from cool evening air in LA</li>
-    <li class="risk">Risk: Gallen has been Ohtani's kryptonite in limited matchups historically</li>
+    <li><strong>Elite contact profile</strong> — 93rd percentile xwOBA, .382 wOBA, 54.1% hard-hit in 2025</li>
+    <li>Rogers Centre dome = <strong>zero weather risk, perfectly neutral conditions</strong> every night</li>
+    <li>Severino posted a career-low <strong>6.8 K/9 in 2025</strong> — not overpowering, hitters made contact</li>
+    <li>Batting 3rd in a deep Blue Jays lineup — <strong>premium spot with multiple PA opportunities</strong></li>
+    <li>Right-handed vs right-handed pitcher — <strong>no platoon disadvantage</strong>, Vladdy hits everyone</li>
+    <li class="risk">Risk: Rogers Centre is a very neutral park, no weather-based boosts available</li>
+    <li class="risk">Risk: Gausman isn't pitching today — no easy path through the Jays lineup for opponents either, cuts Vlad's PA somewhat</li>
   </ul>
 </div>
 
-<!-- PICK 3 -->
 <div class="pick-card bronze">
   <div class="pick-header">
     <div class="pick-rank">🥉 Pick #3 — Speculative</div>
     <div class="confidence-pill medium">MEDIUM Confidence</div>
   </div>
-  <div class="pick-player">Freddie Freeman</div>
-  <div class="pick-info">1B · Los Angeles Dodgers &nbsp;·&nbsp; Batting <span>3rd</span> &nbsp;·&nbsp; vs. Zac Gallen (RHP) · Uniqlo Field</div>
+  <div class="pick-player">Ozzie Albies</div>
+  <div class="pick-info">2B · Atlanta Braves &nbsp;·&nbsp; Batting <span>2nd</span> &nbsp;·&nbsp; vs. Cole Ragans (LHP) · Truist Park</div>
   <div class="stats-row">
-    <div class="stat-box"><span class="sv good">94th</span><span class="sk">wOBA Pctl</span></div>
-    <div class="stat-box"><span class="sv good">.370</span><span class="sk">wOBA</span></div>
-    <div class="stat-box"><span class="sv good">45.7%</span><span class="sk">Hard Hit</span></div>
-    <div class="stat-box"><span class="sv good">LHH</span><span class="sk">vs RHP ✓</span></div>
-    <div class="stat-box"><span class="sv warn">.295+</span><span class="sk">BA (career)</span></div>
+    <div class="stat-box"><span class="sv good">RHB</span><span class="sk">vs LHP ✓</span></div>
+    <div class="stat-box"><span class="sv good">87°F</span><span class="sk">Temp</span></div>
+    <div class="stat-box"><span class="sv good">2nd</span><span class="sk">Bat Order</span></div>
+    <div class="stat-box"><span class="sv warn">Same</span><span class="sk">Matchup</span></div>
   </div>
   <ul class="reasons">
-    <li><strong>Left-handed vs Gallen (RHP)</strong> — platoon edge, Freeman historically crushes righties</li>
-    <li>Hit .295+ BA in 9 of last 10 seasons — <strong>one of the most consistent contact hitters alive</strong></li>
-    <li>94th percentile wOBA / 45.7% hard-hit in 2025 — <strong>still elite at 36</strong></li>
-    <li>Same favorable Uniqlo Field conditions as Ohtani — <strong>74°F, wind blowing out</strong></li>
-    <li class="risk">Risk: xwOBA (.350) trails actual wOBA (.370) — some luck component in his numbers</li>
-    <li class="risk">Risk: Gallen gets LHH out at a reasonable clip with his sweeping arsenal</li>
+    <li><strong>Same favorable matchup as Acuña</strong> — right-handed vs Ragans (LHP) at Truist in 87°F heat</li>
+    <li>Bats 2nd in the order — <strong>premium PA slot</strong>, typically sees 4 at-bats</li>
+    <li>Career .280 hitter with excellent contact rates vs LHP</li>
+    <li class="risk">Risk: Less elite contact profile than Acuña — less certainty on multiple-AB streaks</li>
+    <li class="risk">Risk: Albies' power plays up vs righties; against LHP he's more of a singles/doubles hitter</li>
   </ul>
 </div>
 ```
@@ -338,11 +329,11 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
 
   <div class="section-title">Final Verdict</div>
   <div class="verdict-box">
-    <div class="verdict-label">🏆 Today's BTS Pick — Opening Day</div>
-    <div class="verdict-player">JUAN <span>SOTO</span></div>
-    <div class="verdict-sub">LF · New York Mets · vs. Paul Skenes (RHP) · 1:15 PM ET · Citi Field</div>
+    <div class="verdict-label">🏆 Today's BTS Pick — Fri Mar 27</div>
+    <div class="verdict-player">RONALD <span>ACUÑA JR.</span></div>
+    <div class="verdict-sub">RF · Atlanta Braves · vs. Cole Ragans (LHP) · 7:15 PM ET · Truist Park · 87°F</div>
     <div class="verdict-reason">
-      This is the hardest pick of the young season. Skenes is the best pitcher in baseball with a 1.96 career ERA and a changeup that dominated in 2025. But Soto is the only hitter who matches his elite tier. <strong>Soto posted 100th percentile xwOBA and xBA, a .429 xwOBA, 55.3% hard-hit rate, and drew a Major League-record 127 walks in 2025</strong> — meaning pitchers can't afford to dance around him either. He bats left against a right-hander, gets an early 1:15 PM start with 14 mph wind blowing OUT at Citi Field, and is surrounded by enough lineup protection (Kyle Tucker signed in the offseason) to force Skenes to challenge him. In a matchup of two all-time talents, <strong>Soto's plate discipline and elite contact profile give him the best floor of anyone on today's massive slate.</strong>
+      This is the clearest BTS play of Opening Week. Acuña returned from his second ACL surgery in 2025 and looked every bit the MVP he was in 2023 — posting a .403 wOBA, 92.7 avg exit velocity, and 52.5% hard-hit rate in 95 games. He leads off, meaning 3–4 guaranteed plate appearances. <strong>Cole Ragans is a deceptive matchup</strong> — his 4.67 ERA in 2025 was one of the most misleading numbers in baseball. His xERA was 2.67 and FIP was 2.50, meaning he was actually pitching well but had historically bad luck. Hitters made contact, they just didn't hit it where they needed to. For BTS purposes, that's exactly what we want — a pitcher who gives up contact, facing one of the most elite contact-quality hitters alive. Add in <strong>87°F heat at Truist Park's 1,050 ft elevation</strong> — the hottest conditions on today's entire slate — and Acuña is the most compelling pick on the board today.
     </div>
   </div>
 
@@ -352,20 +343,20 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
     <tbody>
       <tr>
         <td class="rank-cell">1</td>
-        <td><div class="player-name">Juan Soto</div><div class="player-meta">NYM · LF · Bat 3rd · 1:15 PM</div></td>
-        <td>vs. Skenes (R)</td><td>100th xwOBA · .429 · 55.3% HH</td>
+        <td><div class="player-name">Ronald Acuña Jr.</div><div class="player-meta">ATL · RF · Bat 1st · 7:15 PM</div></td>
+        <td>vs. Ragans (L)</td><td>.403 wOBA · 52.5% HH · 87°F</td>
         <td><span class="confidence-pill high">HIGH</span></td>
       </tr>
       <tr>
         <td class="rank-cell">2</td>
-        <td><div class="player-name">Shohei Ohtani</div><div class="player-meta">LAD · DH · Bat 2nd · 8:30 PM</div></td>
-        <td>vs. Gallen (R)</td><td>99th xwOBA · .425 · 58.7% HH</td>
+        <td><div class="player-name">Vladimir Guerrero Jr.</div><div class="player-meta">TOR · 1B · Bat 3rd · 7:07 PM</div></td>
+        <td>vs. Severino (R)</td><td>93rd xwOBA · Dome · No weather risk</td>
         <td><span class="confidence-pill medhigh">MED-HIGH</span></td>
       </tr>
       <tr>
         <td class="rank-cell">3</td>
-        <td><div class="player-name">Freddie Freeman</div><div class="player-meta">LAD · 1B · Bat 3rd · 8:30 PM</div></td>
-        <td>vs. Gallen (R)</td><td>94th wOBA · .370 · LHH platoon</td>
+        <td><div class="player-name">Ozzie Albies</div><div class="player-meta">ATL · 2B · Bat 2nd · 7:15 PM</div></td>
+        <td>vs. Ragans (L)</td><td>RHB platoon edge · 87°F · Bat 2nd</td>
         <td><span class="confidence-pill medium">MEDIUM</span></td>
       </tr>
     </tbody>
@@ -375,17 +366,15 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
 <!-- ══ TAB 2: TODAY'S GAMES ══ -->
 
 <div id="tab-games" class="tab-content">
-  <p class="games-intro">Opening Day 2026 — 11 games today. Full pitching matchups, live weather conditions, and park factor ratings for every game.</p>
-
-  <!-- FEATURED: PIT @ NYM -->
+  <p class="games-intro">Fri Mar 27, 2026 — 8-game slate with the final 3 Opening Series games. Full pitching matchups, weather conditions, and park factors for every game.</p>
 
   <div class="section-title">Featured Game — BTS Pick Game</div>
   <div class="game-card">
     <div class="game-card-header">
-      <div class="game-teams">Pittsburgh Pirates <span class="at">@</span> New York Mets</div>
+      <div class="game-teams">Kansas City Royals <span class="at">@</span> Atlanta Braves</div>
       <div class="game-time-block">
-        <div class="game-time">1:15 PM ET · Thu Mar 26</div>
-        <div class="game-network">NBC / Peacock · Citi Field · Flushing, NY</div>
+        <div class="game-time">7:15 PM ET · Fri Mar 27</div>
+        <div class="game-network">Braves Home Opener · Truist Park · Cumberland, GA</div>
       </div>
     </div>
     <div class="game-card-body">
@@ -393,57 +382,55 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
         <div class="game-section-title">Probable Pitchers</div>
         <div class="pitcher-row">
           <div class="pitcher-item">
-            <div class="pitcher-team-label">Pittsburgh Pirates</div>
-            <div class="pitcher-name">Paul Skenes <span class="pitcher-hand">RHP</span></div>
-            <div class="pitcher-stats">Career: 1.96 ERA · 2.40 FIP · 5.22 K/BB</div>
+            <div class="pitcher-team-label">Kansas City Royals</div>
+            <div class="pitcher-name">Cole Ragans <span class="pitcher-hand">LHP</span></div>
+            <div class="pitcher-stats">2025: 4.67 ERA / 2.50 FIP / 2.67 xERA · 38.1% K rate</div>
           </div>
           <div class="pitcher-item">
-            <div class="pitcher-team-label">New York Mets</div>
-            <div class="pitcher-name">Freddy Peralta <span class="pitcher-hand">RHP</span></div>
-            <div class="pitcher-stats">2025: 2.70 ERA · 17W · 204 K · .270 wOBA allowed</div>
+            <div class="pitcher-team-label">Atlanta Braves</div>
+            <div class="pitcher-name">Chris Sale <span class="pitcher-hand">LHP</span></div>
+            <div class="pitcher-stats">2025: 2.58 ERA · 11.82 K/9 · .265 xwOBA allowed</div>
           </div>
         </div>
       </div>
       <div class="game-section">
         <div class="game-section-title">Weather Conditions</div>
         <div class="weather-grid">
-          <div class="w-row"><span class="w-label">Temp</span><span class="w-val">66°F</span></div>
-          <div class="w-row"><span class="w-label">Wind</span><span class="w-val good">14 mph · Blowing OUT</span></div>
-          <div class="w-row"><span class="w-label">Direction</span><span class="w-val">To right-center</span></div>
-          <div class="w-row"><span class="w-label">Rain Chance</span><span class="w-val good">3%</span></div>
-          <div class="w-row"><span class="w-label">Sky</span><span class="w-val">Partly cloudy</span></div>
+          <div class="w-row"><span class="w-label">Temp</span><span class="w-val good">87°F 🌡</span></div>
+          <div class="w-row"><span class="w-label">Wind</span><span class="w-val warn">11.4 mph · Variable</span></div>
+          <div class="w-row"><span class="w-label">Humidity</span><span class="w-val">40.8%</span></div>
+          <div class="w-row"><span class="w-label">Rain Chance</span><span class="w-val good">0%</span></div>
+          <div class="w-row"><span class="w-label">Sky</span><span class="w-val">Clear & sunny</span></div>
         </div>
       </div>
       <div class="game-section">
         <div class="game-section-title">Park Factor</div>
         <div class="park-block">
-          <div class="park-name-big">Citi Field</div>
-          <span class="park-tag neutral">⬌ Neutral Park</span>
+          <div class="park-name-big">Truist Park</div>
+          <span class="park-tag hitter">⬆ Hitter-Friendly Today</span>
           <div class="park-stat-row">
-            <div class="park-stat"><span class="pv" style="color:var(--yellow)">99</span><span class="pk">Run Factor</span></div>
-            <div class="park-stat"><span class="pv" style="color:var(--yellow)">96</span><span class="pk">HR Factor</span></div>
-            <div class="park-stat"><span class="pv">408ft</span><span class="pk">CF Depth</span></div>
+            <div class="park-stat"><span class="pv" style="color:var(--green)">103</span><span class="pk">Run Factor</span></div>
+            <div class="park-stat"><span class="pv" style="color:var(--green)">106</span><span class="pk">HR Factor</span></div>
+            <div class="park-stat"><span class="pv">1,050</span><span class="pk">Elevation ft</span></div>
           </div>
-          <div class="park-note">Today's 14 mph wind blowing out to right-center bumps this to a slight hitter advantage for lefties.</div>
+          <div class="park-note">87°F heat + 1,050 ft elevation = significant extra carry on fly balls; best hitting conditions on today's slate.</div>
         </div>
       </div>
     </div>
   </div>
   <div class="bts-env-bar">
     <div class="bts-env-label">BTS Environment</div>
-    <div class="bts-env-rating" style="color:var(--yellow);">Moderate — Elite Pitching Both Sides</div>
-    <div class="bts-env-note">Skenes vs Peralta is as good as it gets on a mound. Target hitters with elite plate discipline and contact skills who can survive a short leash. Wind helps slightly.</div>
+    <div class="bts-env-rating" style="color:var(--green);">Favorable — Heat + Elevation Boost</div>
+    <div class="bts-env-note">87°F record heat at Truist Park. Ragans is deceptively hittable (4.67 ERA, 2.67 xERA). Right-handed hitters have platoon edge. Best BTS spot on the slate.</div>
   </div>
 
-  <!-- LAD vs ARI -->
-
-  <div class="section-title">Primetime Game — NBC/Peacock</div>
+  <div class="section-title">NYY @ SF — Series Continues</div>
   <div class="game-card">
     <div class="game-card-header">
-      <div class="game-teams">Arizona Diamondbacks <span class="at">@</span> Los Angeles Dodgers</div>
+      <div class="game-teams">New York Yankees <span class="at">@</span> San Francisco Giants</div>
       <div class="game-time-block">
-        <div class="game-time">8:30 PM ET · Thu Mar 26</div>
-        <div class="game-network">NBC / Peacock · Uniqlo Field at Dodger Stadium · LA</div>
+        <div class="game-time">4:35 PM ET · Fri Mar 27</div>
+        <div class="game-network">Oracle Park · San Francisco, CA</div>
       </div>
     </div>
     <div class="game-card-body">
@@ -451,101 +438,78 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
         <div class="game-section-title">Probable Pitchers</div>
         <div class="pitcher-row">
           <div class="pitcher-item">
-            <div class="pitcher-team-label">Arizona Diamondbacks</div>
-            <div class="pitcher-name">Zac Gallen <span class="pitcher-hand">RHP</span></div>
-            <div class="pitcher-stats">2025: 3.56 ERA · 185 K · 4th straight OD start</div>
+            <div class="pitcher-team-label">New York Yankees</div>
+            <div class="pitcher-name">Cam Schlittler <span class="pitcher-hand">RHP</span></div>
+            <div class="pitcher-stats">2025: 2.96 ERA / 4.11 xERA — ERA outperformed underlying stats</div>
           </div>
           <div class="pitcher-item">
-            <div class="pitcher-team-label">Los Angeles Dodgers</div>
-            <div class="pitcher-name">Yoshinobu Yamamoto <span class="pitcher-hand">RHP</span></div>
-            <div class="pitcher-stats">2025 WS MVP · 2.65 ERA · 1.03 WHIP in 30 starts</div>
+            <div class="pitcher-team-label">San Francisco Giants</div>
+            <div class="pitcher-name">Robbie Ray <span class="pitcher-hand">LHP</span></div>
+            <div class="pitcher-stats">2025: .297 wOBA allowed at home · Return from TJ surgery</div>
           </div>
         </div>
       </div>
       <div class="game-section">
         <div class="game-section-title">Weather Conditions</div>
         <div class="weather-grid">
-          <div class="w-row"><span class="w-label">Temp</span><span class="w-val">74°F</span></div>
-          <div class="w-row"><span class="w-label">Wind</span><span class="w-val good">8 mph · Blowing OUT</span></div>
-          <div class="w-row"><span class="w-label">Direction</span><span class="w-val">To right-center</span></div>
+          <div class="w-row"><span class="w-label">Temp</span><span class="w-val">65.9°F</span></div>
+          <div class="w-row"><span class="w-label">Wind</span><span class="w-val good">3.4 mph · Calm</span></div>
+          <div class="w-row"><span class="w-label">Humidity</span><span class="w-val">50.5%</span></div>
           <div class="w-row"><span class="w-label">Rain Chance</span><span class="w-val good">0%</span></div>
-          <div class="w-row"><span class="w-label">Sky</span><span class="w-val">Mostly clear</span></div>
+          <div class="w-row"><span class="w-label">Sky</span><span class="w-val">Clear</span></div>
         </div>
       </div>
       <div class="game-section">
         <div class="game-section-title">Park Factor</div>
         <div class="park-block">
-          <div class="park-name-big">Uniqlo Field</div>
-          <span class="park-tag neutral">⬌ Neutral / Slight Hitter</span>
+          <div class="park-name-big">Oracle Park</div>
+          <span class="park-tag pitcher">⬇ Pitcher-Friendly</span>
           <div class="park-stat-row">
-            <div class="park-stat"><span class="pv" style="color:var(--yellow)">101</span><span class="pk">Run Factor</span></div>
-            <div class="park-stat"><span class="pv" style="color:var(--green)">105</span><span class="pk">HR Factor</span></div>
-            <div class="park-stat"><span class="pv">395ft</span><span class="pk">CF Depth</span></div>
+            <div class="park-stat"><span class="pv" style="color:var(--red)">94</span><span class="pk">Run Factor</span></div>
+            <div class="park-stat"><span class="pv" style="color:var(--red)">91</span><span class="pk">HR Factor</span></div>
           </div>
-          <div class="park-note">Warm evening with wind blowing out = light HR boost. Best conditions on the full Opening Day slate.</div>
+          <div class="park-note">Calm wind today (3.4 mph) is better than usual, but Oracle remains a tough environment for hitters overall.</div>
         </div>
       </div>
     </div>
   </div>
-  <div class="bts-env-bar">
+  <div class="bts-env-bar" style="margin-bottom:28px;">
     <div class="bts-env-label">BTS Environment</div>
-    <div class="bts-env-rating" style="color:var(--green);">Favorable — Best Conditions of the Day</div>
-    <div class="bts-env-note">74°F, 0% rain, wind OUT, slight HR boost. Gallen is hittable enough. Best environment for a BTS pick on today's slate.</div>
+    <div class="bts-env-rating" style="color:var(--yellow);">Moderate — Schlittler xERA Concern</div>
+    <div class="bts-env-note">Schlittler's 4.11 xERA says he got lucky in 2025. Could be hittable — but Oracle suppresses results. Watch for RHB vs Ray (LHP) opportunities.</div>
   </div>
 
-  <!-- REMAINING GAMES GRID -->
-
-  <div class="section-title">Full Opening Day Slate</div>
+  <div class="section-title">Full Friday Slate</div>
   <div class="mini-games-grid">
     <div class="mini-game">
-      <div class="mini-game-teams">CHW @ MIL</div>
-      <div class="mini-game-meta">Smith vs. Misiorowski · 2:10 PM ET · Roof Closed</div>
-      <div style="margin-top:8px;"><span class="park-tag neutral" style="font-size:9px;padding:3px 8px;">Dome — No Weather</span></div>
+      <div class="mini-game-teams">ATH @ TOR</div>
+      <div class="mini-game-meta">Severino vs. Gausman · 7:07 PM ET · Rogers Centre</div>
+      <div style="margin-top:8px;"><span class="park-tag neutral" style="font-size:9px;padding:3px 8px;">Dome — 30°F outside · Neutral</span></div>
     </div>
     <div class="mini-game">
-      <div class="mini-game-teams">WAS @ CHC</div>
-      <div class="mini-game-meta">Cavalli vs. Boyd · 2:20 PM ET · Wrigley</div>
-      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">⬇ Wind IN — Avoid</span></div>
-    </div>
-    <div class="mini-game">
-      <div class="mini-game-teams">MIN @ BAL</div>
-      <div class="mini-game-meta">Joe Ryan vs. T. Rogers · 3:05 PM ET</div>
-      <div style="margin-top:8px;"><span class="park-tag hitter" style="font-size:9px;padding:3px 8px;">76°F · Wind OUT ✅</span></div>
-    </div>
-    <div class="mini-game">
-      <div class="mini-game-teams">BOS @ CIN</div>
-      <div class="mini-game-meta">Crochet vs. Abbott · 4:10 PM ET</div>
-      <div style="margin-top:8px;"><span class="park-tag hitter" style="font-size:9px;padding:3px 8px;">81°F · Wind Across</span></div>
+      <div class="mini-game-teams">COL @ MIA</div>
+      <div class="mini-game-meta">Freeland vs. Alcantara · 7:10 PM ET</div>
+      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">76.6°F · 9.8 mph wind</span></div>
     </div>
     <div class="mini-game">
       <div class="mini-game-teams">LAA @ HOU</div>
-      <div class="mini-game-meta">Soriano vs. H. Brown · 4:10 PM ET · Dome</div>
-      <div style="margin-top:8px;"><span class="park-tag neutral" style="font-size:9px;padding:3px 8px;">Dome — No Weather</span></div>
+      <div class="mini-game-meta">Kikuchi vs. Burrows · 8:15 PM ET · Daikin Park</div>
+      <div style="margin-top:8px;"><span class="park-tag neutral" style="font-size:9px;padding:3px 8px;">Dome · 80°F outside</span></div>
     </div>
     <div class="mini-game">
       <div class="mini-game-teams">DET @ SD</div>
-      <div class="mini-game-meta">Skubal vs. Pivetta · 4:10 PM ET</div>
-      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">71°F · Minimal Wind</span></div>
+      <div class="mini-game-meta">F. Valdez vs. M. King · 9:40 PM ET · Petco</div>
+      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">Petco — Pitcher Park</span></div>
     </div>
     <div class="mini-game">
-      <div class="mini-game-teams">TEX @ PHI</div>
-      <div class="mini-game-meta">Eovaldi vs. Sanchez · 4:15 PM ET</div>
-      <div style="margin-top:8px;"><span class="park-tag hitter" style="font-size:9px;padding:3px 8px;">75°F · Wind OUT ✅</span></div>
-    </div>
-    <div class="mini-game">
-      <div class="mini-game-teams">TB @ STL</div>
-      <div class="mini-game-meta">Rasmussen vs. Liberatore · 4:15 PM ET</div>
-      <div style="margin-top:8px;"><span class="park-tag hitter" style="font-size:9px;padding:3px 8px;">92°F · Wind OUT 🔥</span></div>
+      <div class="mini-game-teams">ARI @ LAD</div>
+      <div class="mini-game-meta">R. Nelson vs. E. Sheehan · 10:10 PM ET</div>
+      <div style="margin-top:8px;"><span class="park-tag hitter" style="font-size:9px;padding:3px 8px;">74°F · Wind OUT ✅</span></div>
     </div>
     <div class="mini-game">
       <div class="mini-game-teams">CLE @ SEA</div>
-      <div class="mini-game-meta">Bibee vs. Gilbert · 10:10 PM ET · Roof Likely Open</div>
-      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">Cool · T-Mobile Park</span></div>
-    </div>
-    <div class="mini-game">
-      <div class="mini-game-teams">HOU @ CHW</div>
-      <div class="mini-game-meta">H. Brown vs. Smith — alt matchup</div>
-      <div style="margin-top:8px;"><span class="park-tag neutral" style="font-size:9px;padding:3px 8px;">Check lineup</span></div>
+      <div class="mini-game-meta">G. Williams vs. G. Kirby · 9:45 PM ET</div>
+      <div style="margin-top:8px;"><span class="park-tag pitcher" style="font-size:9px;padding:3px 8px;">T-Mobile — Pitcher Park</span></div>
     </div>
   </div>
 </div>
@@ -557,15 +521,16 @@ footer p{font-family:‘DM Mono’,monospace;font-size:10px;color:var(–muted);
     <div class="section-title" style="margin-bottom:0;flex:1;">Season Record</div>
     <button class="add-pick-btn" onclick="openModal()">+ Log Today's Pick</button>
   </div>
+  <div id="storageNotice" class="storage-notice loading">⏳ Loading your saved picks...</div>
   <div class="season-strip">
-    <div class="strip-stat"><span class="sv" id="h_wins" style="color:var(--green)">0</span><span class="sk">Hits</span></div>
-    <div class="strip-stat"><span class="sv" id="h_losses" style="color:var(--red)">0</span><span class="sk">Outs</span></div>
+    <div class="strip-stat"><span class="sv" id="h_wins" style="color:var(--green)">—</span><span class="sk">Hits</span></div>
+    <div class="strip-stat"><span class="sv" id="h_losses" style="color:var(--red)">—</span><span class="sk">Outs</span></div>
     <div class="strip-stat"><span class="sv" id="h_pct">—</span><span class="sk">Hit Rate</span></div>
-    <div class="strip-stat"><span class="sv" id="h_streak" style="color:var(--yellow)">0</span><span class="sk">Cur. Streak</span></div>
-    <div class="strip-stat"><span class="sv" id="h_best" style="color:var(--yellow)">0</span><span class="sk">Best Streak</span></div>
+    <div class="strip-stat"><span class="sv" id="h_streak" style="color:var(--yellow)">—</span><span class="sk">Cur. Streak</span></div>
+    <div class="strip-stat"><span class="sv" id="h_best" style="color:var(--yellow)">—</span><span class="sk">Best Streak</span></div>
   </div>
   <div class="history-list" id="historyList">
-    <div class="history-empty" id="historyEmpty">No picks logged yet.<br>Log tonight's pick after the game!</div>
+    <div class="history-empty" id="historyEmpty">Loading picks...</div>
   </div>
 </div>
 
@@ -597,7 +562,7 @@ Today’s Games tab — for every game today include:
 — Park factor: pitcher-friendly / hitter-friendly / neutral rating, run factor, HR factor, and a 1-sentence park note
 — A BTS Environment Rating for the day (easy / moderate / difficult for hitters)
 
-Finally output the complete updated index.html using the exact BTS Edge 4-tab design. Fill in Today’s Picks and Today’s Games tabs with fresh data. Leave the Pick History and Daily Prompt tabs unchanged. Output only the raw HTML ready to paste into GitHub.</div>
+Finally output the complete updated index.html using the exact BTS Edge 4-tab design. Fill in Today’s Picks and Today’s Games tabs with fresh data. Leave the Pick History and Daily Prompt tabs exactly unchanged — do not modify any JavaScript in those sections. Output only the raw HTML ready to paste into GitHub.</div>
 <button class="copy-btn" id="copyBtn" onclick="copyPrompt()">Copy</button>
 </div>
 <div class="workflow-card">
@@ -609,7 +574,7 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
 <li><span class="step-num">4</span><div>Go to your <strong>GitHub repo</strong> → click index.html → click the ✏️ edit icon</div></li>
 <li><span class="step-num">5</span><div><strong>Select All → Paste</strong> the new code → click <strong>Commit changes</strong></div></li>
 <li><span class="step-num">6</span><div>Netlify auto-detects the change and <strong>republishes in ~30 seconds</strong> ✅</div></li>
-<li><span class="step-num">7</span><div>After the game, go to <strong>Pick History</strong> and log your result — hit ✅ or out ❌</div></li>
+<li><span class="step-num">7</span><div>After the game, go to <strong>Pick History</strong> and log your result — ✅ Hit or ❌ Out</div></li>
 </ul>
 </div>
 
@@ -618,7 +583,7 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
 
 <footer>
   <p>BTS Edge · ESPN · Baseball Savant · FanGraphs · Swish Analytics · MLB.com</p>
-  <p>Opening Day 2026 · Thu Mar 26 · 11-Game Slate</p>
+  <p>Fri Mar 27 2026 · Pick history saved to cloud — survives daily site updates ☁️</p>
 </footer>
 </div>
 
@@ -628,8 +593,8 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
   <div class="modal">
     <h3>Log a Pick</h3>
     <div class="form-row"><label>Date</label><input type="date" id="f_date"></div>
-    <div class="form-row"><label>Player Name</label><input type="text" id="f_player" placeholder="e.g. Juan Soto"></div>
-    <div class="form-row"><label>Matchup</label><input type="text" id="f_matchup" placeholder="e.g. vs. Paul Skenes (RHP)"></div>
+    <div class="form-row"><label>Player Name</label><input type="text" id="f_player" placeholder="e.g. Ronald Acuña Jr."></div>
+    <div class="form-row"><label>Matchup</label><input type="text" id="f_matchup" placeholder="e.g. vs. Cole Ragans (LHP)"></div>
     <div class="form-row"><label>Confidence</label>
       <select id="f_conf"><option value="HIGH">HIGH</option><option value="MED-HIGH">MED-HIGH</option><option value="MEDIUM">MEDIUM</option></select>
     </div>
@@ -644,15 +609,42 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
 </div>
 
 <script>
+  // ── TABS ──
   function switchTab(name,btn){
     document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
     document.getElementById('tab-'+name).classList.add('active');
     btn.classList.add('active');
+    if(name==='history') renderHistory();
   }
-  const KEY='bts_picks_2026';
-  function loadPicks(){try{return JSON.parse(localStorage.getItem(KEY))||[];}catch(e){return[];}}
-  function savePicks(p){localStorage.setItem(KEY,JSON.stringify(p));}
+
+  // ══════════════════════════════════════════════════════
+  // PERSISTENT CLOUD STORAGE
+  // Your picks are saved to a cloud key-value store that
+  // survives every daily HTML update. The page code changes
+  // but the data lives in the cloud, not in the HTML file.
+  // ══════════════════════════════════════════════════════
+  const STORAGE_KEY = 'bts-picks-2026-season';
+
+  async function cloudLoad() {
+    try {
+      const result = await window.storage.get(STORAGE_KEY);
+      return result ? JSON.parse(result.value) : [];
+    } catch(e) {
+      // Key doesn't exist yet — first time user
+      return [];
+    }
+  }
+
+  async function cloudSave(picks) {
+    try {
+      await window.storage.set(STORAGE_KEY, JSON.stringify(picks));
+    } catch(e) {
+      console.error('Storage save failed:', e);
+    }
+  }
+
+  // ── STATS CALC ──
   function calcStats(picks){
     const wins=picks.filter(p=>p.result==='hit').length;
     const losses=picks.filter(p=>p.result==='out').length;
@@ -663,6 +655,7 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
     for(const p of picks){if(p.result==='hit'){cur++;if(cur>best)best=cur;}else if(p.result==='out')cur=0;}
     return{wins,losses,pct,streak,best};
   }
+
   function updateScoreBar(s){
     document.getElementById('scoreWins').textContent=s.wins;
     document.getElementById('scoreLosses').textContent=s.losses;
@@ -674,24 +667,64 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
     document.getElementById('h_streak').textContent=s.streak;
     document.getElementById('h_best').textContent=s.best;
   }
-  function renderHistory(){
-    const picks=loadPicks();
-    updateScoreBar(calcStats(picks));
-    const list=document.getElementById('historyList');
-    const empty=document.getElementById('historyEmpty');
+
+  // ── RENDER HISTORY ──
+  async function renderHistory(){
+    const notice = document.getElementById('storageNotice');
+    notice.className = 'storage-notice loading';
+    notice.textContent = '⏳ Loading your saved picks from cloud...';
+
+    const picks = await cloudLoad();
+    const stats = calcStats(picks);
+    updateScoreBar(stats);
+
+    notice.className = 'storage-notice';
+    notice.textContent = `☁️ ${picks.length} pick${picks.length!==1?'s':''} saved to cloud — your history survives every daily site update.`;
+
+    const list = document.getElementById('historyList');
+    const empty = document.getElementById('historyEmpty');
     list.querySelectorAll('.history-row').forEach(r=>r.remove());
-    if(!picks.length){empty.style.display='block';return;}
+
+    if(!picks.length){
+      empty.style.display='block';
+      empty.textContent='No picks logged yet. Log your first pick after tonight\'s game!';
+      return;
+    }
     empty.style.display='none';
+
     [...picks].reverse().forEach((pick,idx)=>{
       const realIdx=picks.length-1-idx;
       const row=document.createElement('div');
       row.className='history-row '+pick.result;
-      row.innerHTML=`<div class="hr-date">${pick.date}</div><div class="hr-player">${pick.player}</div><div class="hr-matchup">${pick.matchup}</div><div class="hr-result ${pick.result}">${pick.result==='pending'?'Pending':pick.result==='hit'?'✅ Hit':'❌ Out'}</div><div class="hr-actions">${pick.result!=='hit'?`<button class="hr-btn mark-hit" onclick="markResult(${realIdx},'hit')">✅</button>`:''} ${pick.result!=='out'?`<button class="hr-btn mark-out" onclick="markResult(${realIdx},'out')">❌</button>`:''}<button class="hr-btn del" onclick="deletePick(${realIdx})">✕</button></div>`;
+      row.innerHTML=`
+        <div class="hr-date">${pick.date}</div>
+        <div class="hr-player">${pick.player}</div>
+        <div class="hr-matchup">${pick.matchup}</div>
+        <div class="hr-result ${pick.result}">${pick.result==='pending'?'Pending':pick.result==='hit'?'✅ Hit':'❌ Out'}</div>
+        <div class="hr-actions">
+          ${pick.result!=='hit'?`<button class="hr-btn mark-hit" onclick="markResult(${realIdx},'hit')">✅</button>`:''}
+          ${pick.result!=='out'?`<button class="hr-btn mark-out" onclick="markResult(${realIdx},'out')">❌</button>`:''}
+          <button class="hr-btn del" onclick="deletePick(${realIdx})">✕</button>
+        </div>`;
       list.appendChild(row);
     });
   }
-  function markResult(idx,result){const p=loadPicks();p[idx].result=result;savePicks(p);renderHistory();}
-  function deletePick(idx){const p=loadPicks();p.splice(idx,1);savePicks(p);renderHistory();}
+
+  async function markResult(idx,result){
+    const picks=await cloudLoad();
+    picks[idx].result=result;
+    await cloudSave(picks);
+    renderHistory();
+  }
+
+  async function deletePick(idx){
+    const picks=await cloudLoad();
+    picks.splice(idx,1);
+    await cloudSave(picks);
+    renderHistory();
+  }
+
+  // ── MODAL ──
   function openModal(){
     document.getElementById('f_date').value=new Date().toISOString().split('T')[0];
     ['f_player','f_matchup'].forEach(id=>document.getElementById(id).value='');
@@ -701,13 +734,24 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
   }
   function closeModal(){document.getElementById('modalOverlay').classList.remove('open');}
   document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
-  function savePick(){
+
+  async function savePick(){
     const player=document.getElementById('f_player').value.trim();
     if(!player){alert('Please enter a player name.');return;}
-    const p=loadPicks();
-    p.push({date:document.getElementById('f_date').value,player,matchup:document.getElementById('f_matchup').value.trim()||'—',conf:document.getElementById('f_conf').value,result:document.getElementById('f_result').value});
-    savePicks(p);closeModal();renderHistory();
+    const picks=await cloudLoad();
+    picks.push({
+      date:document.getElementById('f_date').value,
+      player,
+      matchup:document.getElementById('f_matchup').value.trim()||'—',
+      conf:document.getElementById('f_conf').value,
+      result:document.getElementById('f_result').value
+    });
+    await cloudSave(picks);
+    closeModal();
+    renderHistory();
   }
+
+  // ── COPY PROMPT ──
   function copyPrompt(){
     navigator.clipboard.writeText(document.getElementById('promptText').innerText).then(()=>{
       const btn=document.getElementById('copyBtn');
@@ -715,7 +759,16 @@ Finally output the complete updated index.html using the exact BTS Edge 4-tab de
       setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
     });
   }
-  renderHistory();
+
+  // ── INIT: load scorebar immediately ──
+  (async()=>{
+    const picks=await cloudLoad();
+    updateScoreBar(calcStats(picks));
+    // Also render history if that tab is somehow already active
+    if(document.getElementById('tab-history').classList.contains('active')){
+      renderHistory();
+    }
+  })();
 </script>
 
 </body>
